@@ -82,10 +82,8 @@ def main(argv):
 
 
 if __name__ == "__main__":
-    # create logger with 'spam_application'
     logger = logging.getLogger('mqtt')
     logger.setLevel(logging.INFO)
-    # create file handler which logs even debug messages
     fh = logging.StreamHandler()
     fh.setLevel(logging.INFO)
     # create formatter and add it to the handlers
