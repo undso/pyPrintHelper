@@ -86,7 +86,8 @@ if __name__ == "__main__":
     logger = logging.getLogger('mqtt')
     logger.setLevel(logging.INFO)
     # create file handler which logs even debug messages
-    fh = logging.StreamHandler()
+    # fh = logging.StreamHandler()
+    fh = logging.FileHandler('pyPrintHelper.log')
     fh.setLevel(logging.INFO)
     # create formatter and add it to the handlers
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
