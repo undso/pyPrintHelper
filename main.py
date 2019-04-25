@@ -7,6 +7,8 @@ import os
 import subprocess, sys
 import time
 
+from pidfile import PIDFile
+
 
 def on_subscribe(mqclient, mquserdata, mid, granted_qos):
     """Methode wird nach dem Verbindungsaufbau mit der Queue aufgerufen"""
@@ -82,15 +84,16 @@ def main(argv):
 
 
 if __name__ == "__main__":
-    logger = logging.getLogger('mqtt')
-    logger.setLevel(logging.INFO)
-    # fh = logging.StreamHandler()
-    fh = logging.FileHandler('pyPrintHelper.log')
-    fh.setLevel(logging.INFO)
-    # create formatter and add it to the handlers
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    fh.setFormatter(formatter)
-    # add the handlers to the logger
-    logger.addHandler(fh)
+    with PIDFile("/var/run/pyPrintHelper.pid"):
+        logger = logging.getLogger('mqtt')
+        logger.setLevel(logging.INFO)
+        # fh = logging.StreamHandler()
+        fh = logging.FileHandler('pyPrintHelper.log')
+        fh.setLevel(logging.INFO)
+        # create formatter and add it to the handlers
+        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        fh.setFormatter(formatter)
+        # add the handlers to the logger
+        logger.addHandler(fh)
 
-    main(sys.argv[1:])
+        main(sys.argv[1:])
